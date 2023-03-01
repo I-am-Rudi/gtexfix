@@ -1,0 +1,717 @@
+\chapter{Algebres de Lie}
+
+\section{Definitions elementaires}
+Une algebre de Lie (matricielle) $\GG$ est d'abord un espace vectoriel de dimension $d<\infty$.
+Nous considerons une base $(e_1,\cdots, e_d)$ de $\GG$. Le commutateur de
+$e_i$ et $e_j$ peut aussi etre developpe dans la base,
+\be
+[e_i,e_j] = \sum_{m=1}^d c_{ij}^me_m \,.
+\ee
+Les constantes $c_{ij}^m$ s'appellent {\bf les constantes de structure} de l'algebre $\GG$ par rapport
+a la base $(e_1,\cdots, e_d)$.
+
+Un simple calcul explicite montre que pour trois elements quelconques, $x,~y,~z$ de $\GG$ on a
+$$[x,[y,z]] + [y,[z,x]] + [z,[x,y]] = 0 \,.$$
+Ceci est {\bf l'identite de Jacobi}. Applique sur les trois elements $e_i,~e_j,~e_k$ de la base ceci donne
+l'identite suivante pour les constantes de structure:
+\be\label{e:jac-struc}
+\sum_{\ell=1}^d(c_{i\ell}^mc_{jk}^\ell + c_{j\ell}^mc_{ki}^\ell + c_{k\ell}^mc_{ij}^\ell) =0  ~~ \forall \, 1\le i,j,k,m\le d
+\ee
+Tout ensemble de $d^3$ nombres $c_{ij}^\ell$ qui est anti-symetrique dans les indices inferieurs est
+qui satisfait les identites de Jacobi, represente les constantes de structures pour une algebre de Lie.
+
+Sous un changement de base, $ e_j \ra \tilde e_j = \sum_i {S_j}^ie_i$ les constantes de structures 
+se transfoment. Pour simplifier la notation nous utilisons ici et par la suite souvent la convention d'Einstein: 
+sur tout indice qui
+appara\i t deux fois dans une expression une somme (de 1 a $d$) est effectuee.
+$$
+\tilde c_{ij}^m\tilde e_m = [\tilde e_i,\tilde e_j] = {S_i}^k{S_j}^\ell[e_k,e_\ell] = {S_i}^k{S_j}^\ell c_{k\ell}^ne_n\,.
+$$
+Donc
+$$
+\tilde c_{ij}^m{S_m}^n = {S_i}^k{S_j}^\ell c_{k\ell}^n \quad \mbox{ ou }~ 
+\tilde c_{ij}^m = {S_i}^k{S_j}^\ell c_{k\ell}^n{(S^{-1})_n}^m \,.
+$$ 
+
+\begin{ddd}{\bf Homomorphismes d'algebres de Lie:}\\
+Une application lineaire $\phi$ de l'algebre de Lie $\GG$ dans l'algebre de Lie $\GG'$ est
+un homomorphisme d'algebre de Lie si
+\be\label{e:homLie}
+\phi([x,y]) = [\phi(x),\phi(y)] \quad \forall\, x,\, y \in \GG\,.
+\ee
+\end{ddd}
+\begin{ddd}{\bf sous-algebres de Lie:}\\
+Un sous-espace lineaire $\HH \subset \GG$ de l'algebre de Lie $\GG$ est appele sous-algebre de Lie si
+$[x,y] \in \HH$ pour tout $x,~y\in \HH$.
+\end{ddd}
+
+\begin{eee} Montrer que pour tout homomorphisme d'algebres de Lie im$(\phi)\subset \GG'$ 
+est une sous-algebre de $\GG'$ et ker$(\phi)\subset \GG$ est une sous-algebre de $\GG$.
+Comme ceci est certainment le cas pour la structure d'espace lineaires, il reste juste a demontrer que
+$[x,y] \in {\rm ker}(\phi)$ pour tout $x,~y \in {\rm ker}(\phi)$ et $[x',y'] \in {\rm im}(\phi)$ pour tout 
+$x',~y' \in {\rm im}(\phi)$. 
+\end{eee}
+
+\begin{ppp}~\label{p:1.6} {\bf La representation adjointe:} \\
+Les constantes de structures $c_{ij}^n$ d'une algebre de Lie a dimension $d$ forment $d$ matrices 
+$d\times d$ donnees par ${(T_n)^i}_{j} = c_{nj}^i$ qui satisfont la relation de commutation
+$$ [T_m,T_n] = c_{mn}^jT_j \, .$$
+En d'autres mots, l'application lineaire definie par ses valeurs sur la base $(e_i)$ par 
+$$ {\rm ad} : e_i \mapsto T_i $$
+est un homomorphisme de l'algebre de Lie $\GG$ dans l'espace lineaire des matrices $d\times d$ genere
+par les $T_i $. Cet homomorphisme est la "representation adjointe" de $\GG$.
+\end{ppp}
+
+\begin{prv} (de la prop.~\ref{p:1.6})
+\bean
+{([T_m,T_n])^i}_j =  {(T_m)^i}_\ell {(T_n)^\ell}_{j} -  {(T_n)^i}_\ell {(T_m)^\ell}_{j} &=& 
+c_{m\ell}^ic_{nj}^\ell -c_{n\ell}^ic_{mj}^\ell  = \\ c_{m\ell}^ic_{nj}^\ell  + c_{n\ell}^ic_{jm}^\ell  
+\underbrace{=}_{\mbox{Jacobi}} - c_{j\ell}^ic_{mn}^\ell = c_{\ell j}^ic_{mn}^\ell
+&=& c_{mn}^\ell {(T_\ell)^i}_j \,.\eean
+Avec ceci on a aussi demontre que l'espace lineaire genere par les $T_i$ est 
+une algebre de Lie (il est ferme sous commutation).
+En plus, l'extension lineaire de l'application $e_i \mapsto T_i$ est un  homomorphsime d'algebres de Lie.  \hfill $\Box$
+\end{prv}
+Evidemment, les $T_i$ ne forment pas necessairement une base de l'espace lineaire qu'ils generent. Il se peut
+que certains entre eux sont dependants. Donc la dimension, dim(im(ad)) $\leq d$. Par exemple pour une
+algebre de Lie commutative $T_i \equiv 0$ et ad$(x) =0~ \forall\, x\in \GG$.
+  
+On peut aussi comprendre la representation adjointe comme un homomorphisme de $\GG$ dans 
+les endomorphismes sur $\GG$, End($\GG$),
+$${\rm ad} : \GG \ra {\rm End}(\GG) : x \mapsto {\rm ad}(x) \quad \mbox{ avec }  {\rm ad}(x)(y) = [x,y]\,. $$
+Plus precicement, comme $\GG$ est un espace lineaire de dimension $d$ les matrices generes par les $T_i$
+sont des endomorphismes de $\GG$ dans la base $(e_i)$ donnee. Soit $x= x^ie_i$ donc ad$(x) = x^iT_i$.
+Pour $y=y^ie_i$ on a donc 
+$$
+({\rm ad}(x)y)^ie_i = \left(x^m{(T_m)^i}_\ell y^\ell\right)e_i = x^my^\ell c_{m\ell}^ie_i = x^my^\ell[e_m,e_\ell]
+=[x,y] \,. $$
+
+\begin{ddd}{\bf Ideal:}\\
+Un sous-espace, $\KK \subset \GG$ est appele un ideal si pour tout $z\in \KK$ et $x\in \GG$
+$[z,x]\in \KK$. En particulier, un ideal est toujours une sous-algebre de Lie.
+\end{ddd}
+
+\begin{ppp}{\bf Quotient algebra:}\\ \label{p:1.quot}
+Soit $\GG$ une algebre de Lie et $\KK \subset \GG$ un ideal.\\
+\begin{enumerate}
+\item Pour $x,\, y\in \GG$ la relation $x\sim y$ si $x-y\in \KK$ est une relation d'equivalence.
+\item L'espace lineaire des classes $\overline x$  (l'espace quotient $\GG/\KK$ dans le sens de l'algebre lineaire)
+muni du commutateur induit par $\GG$, c'est-a-dire $ [\overline x,\overline y] =   \overline{[x,y]}$, est une algebre
+de Lie. On l'appelle le quotient, $\GG/\KK$.
+\end{enumerate}
+\end{ppp}
+\begin{prv} (de la prop~\ref{p:1.quot})
+\begin{enumerate}
+\item Evident, comme en algebre lineaire.
+\item Il faut just demontrer que $ \overline{[x,y]}$ ne depend pas des representantes $x$ et $y$. 
+Considerons $x' = x+z$ et $y'=y+w$ avec $z,\,w\in\KK$, deux autres representantes de $\overline x$ et $\overline y$.
+Alors $$ \overline{[x',y']} = \overline{[x+z,y+w]} = \overline{[x,y] + [x,w]-[y,z]+[z,w]} =  \overline{[x,y]}$$ parce que
+$ [x,w]-[y,z]+[z,w] \in \KK$. \hfill $\Box$
+\end{enumerate}
+\end{prv}
+
+\begin{ppp}~ \label{p:1.7} \\
+Le noyau ker$(\psi)$ de tout homomorphisme $\psi : \GG \ra \GG'$ entre algebres de Lie
+ est un ideal. 
+\end{ppp}
+\begin{prv}(de prop.~\ref{p:1.7})\\
+Soit $x\in {\rm ker}(\psi)$ et $y\in\GG$ quelconque. Alors $\psi([x,y]) = [\psi(x),\psi(y)]=
+[0,\psi(y)] = 0$. Donc aussi $[x,y]\in {\rm ker}(\psi)$.
+\end{prv}
+
+\begin{ppp}~\label{p:ideal}
+\begin{enumerate}
+\item Soient $I$ et $J$ des ideaux de l'algebre de Lie $\GG$ tels que $I\subset J$. Alors $J/I$ est un ideal de $\GG/I$
+et $(\GG/I)/(J/I)$ est isomorphe a $\GG/J$.
+\item Pour deux ideaux $I,\; J$ de $\GG$ il existe un isomorphisme naturel entre $(I+J)/J$ et $I/(I\cap J)$. 
+\end{enumerate}
+\end{ppp}
+\begin{prv} (de prop.~\ref{p:ideal}) Exercice.
+\end{prv}
+
+\begin{ppp}~ \label{p:1.hom} \\
+Soit $\phi : G \ra G'$ un homomorphisme entre les groupes de Lie $G$ et $G'$. 
+C'est-a-dire que $\phi$ 
+est un homomorphime de groupe qui est differentiable. Alors
+$ \phi_* : \GG \ra \GG'$ defini par 
+\be\label{e:phi*}  \phi_*(x):= \left.\frac{d}{dt}\right|_{t=0} \phi(e^{tx})  ~ , ~ x\in \GG \ee
+est un homomorphisme des algebres de Lie $\GG$ et $\GG'$. L'algebre de Lie  du noyau ${\rm ker}(\phi)\subset G$ 
+est l'ideal ${\rm ker}(\phi_*)\subset \GG$. L'algebre de Lie du groupe de Lie 
+$G/{\rm ker}(\phi)$  est $\GG/{\rm ker}(\phi_*)$
+et l'homomorphisme $\overline\phi_*$ de $\GG/{\rm ker}(\phi_*)$ dans ${\rm im}(\phi_*)$ induit par
+l'isomorphisme $\overline\phi : G/{\rm ker}(\phi)\ra {\rm im}(\phi)$ est un isomorphisme d'algebres de Lie
+donne par
+\be \overline\phi_*(\overline{x}) = \phi_*(x)\,.\ee
+\end{ppp}
+\begin{prv}(de prop.~\ref{p:1.hom})\\
+De la definition (\ref{e:phi*}) et du fait que $\phi(e^{tx})$ est un groupe a un parametre, il suit 
+d'abord que $\phi(e^{tx}) = e^{t\phi_*(x)}$.
+Pour voir que $\phi_*$ est une application lineaire, il faut noter que pour $x,y\in \GG$
+$$ \left.\frac{d}{dt}\right|_{t=0}(e^{t(x+y)}) = \left.\frac{d}{dt}\right|_{t=0}(e^{tx}e^{ty})\, .$$
+ Ceci se voit avec une simple expansion en serie. Notez que les deux expressions sont des chemins dans 
+ le groupe $G$ mais le cote droit n'est pas un groupe a un parametre. Avec ceci il suit que
+ $$ \phi_*(x+y) =  \left.\frac{d}{dt}\right|_{t=0}\phi(e^{t(x+y)} )= \left.\frac{d}{dt}\right|_{t=0}
+ \phi(e^{tx}e^{ty}) = \phi_*(x) + \phi_*(y) \:.$$
+ Evidemment $\phi_*(\la x) = \la \phi_*(x)$.
+ Pour la premiere partie il nous reste encore a demontrer 
+que $\phi_*$ respecte le crochet de Lie. Pour ceci nous nous rappelons que 
+$$[x,y] = \left.\frac{d}{dt}\right|_{t=0}(e^{tx}ye^{-tx}) =  \left.\frac{d}{dt}\right|_{t=0} 
+\left.\frac{d}{ds}\right|_{s=0}(e^{tx}e^{sy}e^{-tx})\,.$$ 
+Donc
+\bean
+ \phi_*([x,y]) &=&\phi_*\left( \left.\frac{d}{dt}\right|_{t=0} 
+\left.\frac{d}{ds}\right|_{s=0}e^{t x}e^{s y}e^{-t x}\right)\\
+ &=& \left.\frac{d}{dt}\right|_{t=0} 
+\left.\frac{d}{ds}\right|_{s=0}(\phi(e^{tx})\phi(e^{sy})\phi(e^{-tx})) \\   
+% = \left.\frac{d}{dt}\right|_{t=0}(\phi(e^{tA})\phi_*(B) \phi(e^{-tA})) \\
+ &=& \left.\frac{d}{dt}\right|_{t=0}(e^{t\phi_*(x)}\phi_*(y) e^{-t\phi_*(x)}) = [\phi_*(x),\phi_*(y)] \,.
+ \eean 
+Nous demontrons maintenant que l'algebre de Lie du noyau ${\rm ker}(\phi)$
+est justement le noyau ${\rm ker}(\phi_*)$. Soit $g(t) = e^{tx} \in {\rm ker}(\phi)$. Donc
+$\phi(g(t)) \equiv \id  ~\forall \; t$ et alors $\phi_*(x)=0$, donc l'algebre de Lie de ${\rm ker}(\phi)$ est contenue dans 
+${\rm ker}(\phi_*)$. D'autre part pour $x\in {\rm ker}(\phi_*)$, $\phi_*(x)=0$ et  
+$\phi(e^{tx}) =  e^{t\phi_*(x)} =\id$. Donc $x$ est dans l'algebre de Lie de ${\rm ker}(\phi)$. \\
+Nous savons deja que $\overline\phi : G/\ke(\phi) \ra \im(\phi)$ est un isomorphisme entre groupes de Lie.
+En plus, comme $\ke(\phi_*)$ est l'algebre de Lie de $\ke(\phi)$, l'algebre de Lie de $G/\ke(\phi)$ est 
+$\GG/\ke(\phi_*)$. Ceci parce que pour deux groupes a un parametre $g_1(t),\, g_2(t)\in \overline{g(t)}$
+avec $g_1(t) = e^{tx_1}$ et $g_2(t) = e^{tx_2}$ nous avons $g_1(t)g_2(t)^{-1} \equiv h(t) \in \ke(\phi)$.
+Donc 
+$$ x_1-x_2 = \left.\frac{d}{dt}\right|_{t=0}(g_1(t)g_2(t)^{-1}) = \left.\frac{d}{dt}\right|_{t=0}h(t)$$
+ou $h(t)=g_1(t)g_2(t)^{-1}$ est un chemin dans $\ke(\phi)$ avec $h(0)=\id$ et sa derivee a $t=0$
+est donc un element de son algebre de Lie $\ke(\phi_*)$. Ceci montre que $\overline{\phi_*}$ est bien
+defini et que $(\overline\phi)_* = \overline{\phi_*}$. Le resultat que $\overline{\phi_*}$ est un isomorphisme 
+entre algebres de Lie suit du fait que un homomorphisme entre algebres de Lie, $\psi_*$,
+ induit par un homomorphisme entre groupes de  Lie, $\psi$, est un isomorphisme si et seulement si $\psi$ est 
+ un isomorphisme (exercice!). Mais d'apres l'exercice~\ref{ee:1iso},  $\overline\phi$ est un isomorphisme entre
+ $G/\ke(\phi)$ et $\im(\phi)$.
+\hfill $\Box$
+\end{prv}
+
+\begin{ddd}{\bf Groupe de Lie simple:}\\
+Un groupe de Lie est appele {\bf simple} s'il ne contient aucun 
+sous-groupe normal  non-trivial {\bf connexe}.  C'est-a-dire la composante de l'identite de tout sous-groupe 
+normal est trivial.~\label{d:Lie-simple}
+\end{ddd}
+
+Notez que ceci est different de la notion 'simple' pour un groupe abstrait.
+Par exemple le groupe $SU(2)$ qui contient le sous-groupe normal $\{\id,
+-\id\}$ n'est pas simple comme groupe abstrait mais, comme  $\{\id,
+-\id\}$ n'est pas connexe, il est un groupe de Lie simple. 
+
+\begin{ddd}{\bf Algebre de Lie simple:}\\
+Une algebre de Lie d'un groupe de Lie simple est appelee algebre de Lie simple.
+\end{ddd}
+
+\begin{ppp}~ \label{p:1.8} \\
+Une algebre de Lie simple n'a aucun ideal non-trivial.
+\end{ppp}
+
+\begin{prv} (de la prop.~\ref{p:1.8})\\
+La raison pour cette proposition est que la sous-algebre de Lie qui correspond a
+un sous-groupe normal est un ideal. Pour le voir, considerons un sous-groupe
+normal $K\subset G $ et son algebre de Lie, $\KK\subset \GG$. Pour $x\in \KK$ et $y\in \GG$,
+donc $e^{sy}e^{tx}e^{-sy} \in K$. Pour $s$ fixe, ceci est un groupe a un parametre dans
+$K$. Sa derivee a $t=0$ est donc dans $\KK$, c'est-a-dire $e^{sy}xe^{-sy} \in 
+\KK~\forall~s$. La derivee de ceci a $s=0$ donne d'apres eq.~(\ref{e:BH2})
+$[y,x]$ qui est donc en $\KK$. Alors $\KK$ est un ideal. \hfill $\Box$
+\end{prv}
+
+\section{Algebres de Lie  semisimples}
+\subsection{Definitions}
+
+\begin{ddd}{\bf Groupe de Lie  semisimple:}\\
+Un groupe de Lie est appele {\bf soluble} s'il existe une serie finie de sous-groupes de Lie {\bf connexes}, 
+$\{e\} =G^{(n)} \subset G^{(n-1)} \subset G^{(n-2)} \cdots \subset G^{(0)}=G$
+telle que $G^{(i+1)}$ est un sous-groupe normal de $G^{(i)}$ et le quotient $G^{(i)}/G^{(i+1)}$ 
+est un groupe de Lie abelien. \\
+Un groupe de Lie est appele  semisimple s'il ne contient pas de sous-groupe de Lie normal soluble non-trivial.
+\end{ddd}
+
+
+\begin{ddd}{\bf Algebre de Lie  semisimple:}\\
+Une algebre de Lie d'un groupe de Lie  semisimple est appelee algebre de Lie  semisimple.
+\end{ddd}
+\begin{ddd}{\bf Algebre de Lie soluble:}\\
+Une algebre de Lie $\GG$ est appelee soluble si pour $\GG^{(0)} :=\GG$ et $\GG^{(j+1)} :=[\GG^{(j)},\GG^{(j)}]$
+il existe un $n\in \NN$ tel que $\GG^{(n)} = \{0\}$.
+Ici est par la suite la notion $[{\cal K},{\cal K}]$ pour une algebre de Lie $\cal K$ denomme l'espace lineaire 
+engendre par les elements dans  $[{\cal K},{\cal K}]$. Il est facile a voir que ceci est une algebre de Lie.
+Des fois nous utilisons aussi la notation span$\left([{\cal K},{\cal K}]\right)$.
+\end{ddd}
+\begin{eee}
+Montrez que pour un ideal $I\subset \GG$, $[I,I]$ est aussi un ideal dans $\GG$. Ici  $[I,I]$ est 
+l'espace vectoriel genere par $\{ [x,y] : x, y \in I\}$ (indication: identite de 
+Jacobi!). Utilisez ceci pour demontrer 
+que les $\GG^{(j)}$ dans la definition precedante sont des ideaux.
+\end{eee}
+\begin{ppp} Soit $\GG$ une algebre de Lie. \label{p:sol}
+\begin{enumerate}
+\item Si $\GG$ est soluble aussi tous ses sous-algebres et tous ses images sous homomorphismes le sont.
+\item Si $I\subset \GG$ est un ideal soluble tel que $\GG/I$ est soluble alors $\GG$ est soluble.
+%\item Si $I$ et $J$ sont des ideaux soluble de $\GG$, tel est $I+J$.
+\end{enumerate}
+\end{ppp}
+\begin{prv} (de prop.~\ref{p:sol}).
+\begin{enumerate}
+\item Si $ K\subset \GG$ est une sous-algebre et soit $ K^{(i)}$ defini comme $\GG^{(i)}$.
+Donc $ K^{(i)} \subset \GG^{(i)}$.\\ Soit $\phi : \GG \ra \GG'$ un 
+homomorphism avec im$(\phi) = \MM\subset \GG'$. Par induction on trouve que $\phi(\GG^{(i)}) = \MM^{(i)}$.
+\item Supposons $(\GG/I)^{(n)} =0$. En applicant 1. sur la projection, qui est bien sur un homomorphisme
+$\pi : \GG \ra \GG/I$, nous obtenons $\pi(\GG^{(n)}) = (\GG/I)^{(n)} =0$. Donc $\GG^{(n)}\subset \ke(\pi) =I$.
+Mais $I$ est soluble, disons $I^{(m)} = 0$. Donc $\GG^{(n+m)}=0$. 
+%\item D'apres prop.~\ref{p:ideal} il existe un isomorphisme entre $(I+J)/J$ et $I/(I\cap J)$. Comme $I/(I\cap J)$
+%est l'image sous la projection de $I$ dans $I/(I\cap J)$,  alors aussi $I/(I\cap J)$ et donc
+%$(I+J)/J$ sont solubles. D'apres 2. tel est donc aussi $I+J$. \hfill $\Box$ 
+\end{enumerate}
+\end{prv}
+
+\begin{ddd}{\bf Algebre de Lie nilpotent:}\\
+Une algebre de Lie $\GG$ est appelee nilpotente si pour $\GG^0 :=\GG$ et $\GG^{j+1} :=[\GG,\GG^j]$
+il existe un $n\in \NN$ tel que $\GG^n = \{0\}$.
+\end{ddd}
+Notez la difference entre $\GG^n$ et $\GG^{(n)}$. Evidemment une algebre de Lie nilpotent est 
+soluble mais le contraire n'est pas vrai. 
+\begin{ddd} {\bf Centre:}\\
+Le centre, $Z(\GG)$, d'une algebre de Lie, $\GG$ consiste de ses elements qui commutent avec tous les autres.
+$x\in Z(\GG)$ si et seulement si $[x,y]=0~\forall\, y\in \GG$.\\
+\end{ddd}
+Evidemment, le centre d'une algebre est un ideal nilpotent et le centre d'un groupe est un sous-groupe normal. Il est facile
+a verifier que l'algebre de Lie de $Z(G)$ est simplement $Z(\GG)$.
+
+\begin{ppp} Soit $\GG$ une algebre de Lie. \label{p:nil}
+\begin{enumerate}
+\item Si $\GG$ est nilpotent aussi tous ses sous-algebres et sous ses images sous homomorphismes le sont.
+\item Si $\GG/Z(\GG)$ est nilpotent alors $\GG$ est nilpotent.
+\item Si $\GG \neq 0$ est nilpotent $Z(\GG)\neq 0$.
+\end{enumerate}
+\end{ppp}
+\begin{prv} (de prop.~\ref{p:nil}).
+\begin{enumerate}
+\item La preuve de ce point est comme 1. de la prop.~\ref{p:sol}.
+\item Supposons $(\GG/Z(\GG))^{n} =0$. Mais pour $n\ge 1,~(\GG/Z(\GG))^{n} =\GG^{n}$. 
+\item Soit $\GG^{n-1}\neq 0$ mais $\GG^n =0$ Donc $\GG^{n-1}\subset Z(\GG)$. \hfill $\Box$ 
+\end{enumerate}
+\end{prv}
+
+\begin{ppp}~\label{p:1ss} \\
+Une algebre de Lie   semisimple ne contient aucun ideal soluble.\end{ppp}
+\begin{prv}
+Soit $G$ un groupe de Lie  semisimple et $\GG$ son algebre de Lie. Donc $\GG$ est  semisimple. 
+$G$ ne contient pas de sous-groupe normale soluble. 
+Supposons que $\GG$ contient un ideal $\GG^{(0)}$ soluble avec
+$$ \GG^{(0)} \supset \GG^{(1)} \supset \cdots  \supset \GG^{(n)}\equiv\{0\} $$
+et $[\GG^{(i)},\GG^{(i)}] = \GG^{(i+1)}$. Nous considerons les sous-groupes
+$$ G^{(i)}\equiv e^{t\GG^{(i)}}$$
+par construction $G^{(i+1)}$ est un sous-groupe normal de $G^{(i)}$ et $G^{(i)}/G^{(i+1)}$ 
+est abelien et $G^{(n)} =\{\id\} $.
+Donc $G^{(0)}$ est soluble ce qui contredit l'hypothese. \hfill $\Box$
+\end{prv}
+Comme ad $: \GG \ra {\rm End}(\GG) = \RR^d\times \RR^d$ est un homomorphisme entre algebres de Lie,
+son noyau est un ideal. Pour une algebre de Lie simple il suit donc que 'ad' est injectif. En general,
+le noyau de 'ad' est le centre de l'algebre de Lie, donc en particulier un ideal soluble. Donc aussi pour une
+algebre  semisimple, 'ad' est injectif et le centre est nulle. 
+
+Nous demontrerons que toute algebre de Lie  semisimple est une somme directe d'ideaux simples.
+En plus, cette decomposition est unique.
+Pour ceci il nous faut d'abord quelques resultats intermediaires.
+
+\subsection{Theoremes de Engel et de Lie}
+
+Evidemment, si $\GG$ est nilpotent, ad$(x)$ est un endomorphisme nilpotent sur $\GG$ pour tout $x\in\GG$. Nous voulons demonter que aussi l'inverse est vrai. Pour ceci nous commen\c{c}ons avec le lemme suivant:
+
+\begin{lem} \label{l:nil} Soit $x\in {\rm End}(V)$ un endomorphisme nilpotent sur $V$, un espace 
+vectoriel de dimension fini. Alors aussi ad$(x)$ est nilpotent.
+\end{lem}
+\begin{prv}(du lemme~\ref{l:nil})\\
+Nous definissions les endomorphsimes $g_x$ et $d_x$ sur End$(V)$ par
+$$ g_x(y)  = xy \quad \mbox{et} \quad d_xy = yx ~\forall~ y\in {\rm End}(V) \,.$$
+Comme $x$ est nilpotent aussi $g_x$ et $d_x$ le sont. En plus, ces deux endomorphismes commutent, 
+et aussi leur difference est nilpotent. Mais $g_x -d_x = {\rm ad}(x)$. \hfill $\Box$
+\end{prv}
+
+\begin{ppp}\label{p:Lv0} Soit $L \subset {\rm End}(V)$ une sous-algebre des endomorphismes 
+sur un espace vectoriel $V$ de dimension fini. Si tous les elements de $L$ sont nilpotent, 
+alors il existe un $v\in V,~ v\neq 0$ tel que $L v =0$, c'est-a-dire $xv=0 ~\forall\; x\in L$.
+\end{ppp}
+
+\begin{prv}(de la proposition~\ref{p:Lv0})\\
+Nous procedons par induction en dim$\,L$. Pour dim$\,L=0$ et dim$\,L=1$ le resultat est evident.
+Nous supposons que la proposition soit vrai pour dim$\,L=n-1$. Soit dim$\,L=n$, $n>1$ et $ K\subset L$ une
+sous-algebre de dimension dim$\, K <n$. Alors $ K$ agit (via ad) comme algebre de Lie nilpotent sur $L$
+et donc aussi sur l'espace vectoriel $L/ K$. Comme la proposition est vrai pour $ K$, ceci garantit l'existence d'un vecteur non-nulle $x_K+ K$, $x_K\not\in K$ dans $L/ K$ qui est anulle par l'action de $ K$ sur $L/ K$. 
+C'est-a-dire $[y,x_K]\in  K~\forall\; y\in  K$.  Donc $x_K\in N_L( K)$, ou $N_L( K)$ est le normalisateur de $ K$ dans $L$ definit par
+$$  N_L( K) =\{x\in L| [x,y] \in  K ~ \forall\: y\in K\} \,.$$
+Evidemment, $ K\subset N_L( K)$ et dans le cas actuel $ K$ est proprement inclus dans $N_L( K)$, 
+c'est-a-dire $N_L( K)$ est plus grand que $ K$, il contient en particulier aussi $x_K$. $N_L( K)$ n'est pas seulement un espace vectoriel mais aussi une sous-algebre de Lie, parce que pour $x,y\in N_L( K)$ et
+$z\in K$, nous avons avec l'identite de Jacobi
+$$ [[x,y],z] = -[[y,z],x] - [[z,x],y] \in  K \,,$$
+donc $[x,y]\in N_L( K)$. (En effet, $N_L( K)$ est la plus grande sous-algebre de $L$ qui contient $ K$ 
+comme ideal.) Nous choisissons maintenant $ K$ comme la plus-grande sous-algebre de Lie propre de $L$, 
+c'est-a-dire il n'existe pas de sous-algebre propre $ K'$ de $L$ telle que $ K\subset  K'\subset L$. 
+On appelle $ K$ une sous-algebre de Lie {\em maximale}.
+Nous vouons demontrer que $ K$ a co-dimension 1. C'est-a-dire $\dim K =n-1$. Nous observons d'abord que
+$N_L( K)$ est une sous-algebre de Lie qui contient $ K$ proprement, donc $N_L( K)=L$. Ceci implique 
+que $ K$ est un ideal et le quotient $L/ K$ est alors une algebre de Lie.  La condition $\dim K =\dim L-1$ est equivalent a $\dim(L/ K) = 1$. Supposons que ceci ne soit pas vrai. Donc $L/ K$ a un propre sous-espace $S$
+de dimension 1, qui est toujours aussi une sous-algebre de Lie (commutative). Soit  $\pi :L \ra L/ K$ la projection. Alors $\pi^{-1}(S) \subset L$ est une sous-algebre qui contient $ K=\pi^{-1}(0)$ proprement. Mais si $S\neq L/ K$,
+$\pi^{-1}(S) \neq L$. Ceci est une contradiction avec la condition que $ K$ soit maximale.
+Nous pouvons alors choisir $ K$ de dimension $n-1$. Donc $L = K \oplus \CC x$. 
+Par induction $W =\{v\in V| Kv=0\}$ est non-nulle. Mais pour $x\in L$, $y\in K$ $[y,x]\in K$ parce que $ K$ 
+est un ideal et donc pour $w\in W$, $yxw=xyw +[y,x]w =0$,
+donc $xw\in W$. Alors $x\in L- K$ est un endomorphisme sur $W$. Comme $x$ est nilpotent, en applicant
+la proposition sur l'algebre $\CC x$, 
+il existe  un $v\in W,~ v\neq 0$ avec $x(v)=0$.
+Donc $L v=0$.\hfill $\Box$
+\end{prv}
+
+\begin{ttt}{\bf (de Engel)}\label{t:engel}\\
+Si tous les elements d'une algebre de Lie $L$ sont ad-nilpotent, $L$ est nilpotent. 
+\end{ttt}
+
+\begin{prv}(du theoreme de Engel~\ref{t:engel})\\
+Par induction en dim$\,L$. Si dim$L=1$ le theoreme est trivial (ad$(x) \equiv 0$). 
+L'algebre ad$(L)\subset {\rm End}(L)$ satisfait aux condition de la prop.~\ref{p:Lv0}. Il existe alors un 
+$x\in L\,,~ x\neq 0$ avec $[L,x]=0$. Donc $Z(L)\neq 0$. Alors $L/Z(L)$ est une algebre de Lie de 
+dimension inferieure dont tous les elements sont ad-nilpotent. Donc $L/Z(L)$ est nilpotent. Et avec
+la partie~(ii) de la prop.~\ref{p:nil} il suit que $L$ est nilpotent. \hfill $\Box$
+\end{prv}
+
+Evidemment, si $[L,L]$ est nilpotent, $L$ est soluble. Mais nous demontrons que
+aussi le contraire est vrai. En plus, nous allons trouver que pour les algebres de Lie solubles, 
+$L \subset {\rm End}(V)$, on trouve une base de $V$ telle que toutes les matrices sont  
+triangulaires superieures. Nous commen\c{c}ons par une definition et un lemme
+
+\begin{ddd}\label{d1:poid}
+Soit $L\subset {\rm End}(V)$ une algebre de Lie. Pour une application lineaire 
+$\la :L \ra \CC : x \ra \la_x$ (c'est-a-dire $\la \in L^*$) nous definissons  
+ le sous-espace
+$$ V_\la = \{v\in V| xv =\la_x\cdot v ~~ \forall \; x\in L \} .$$
+$V_\la$ est l'espace de poids pour $\la$. 
+$V_\la$ est l'espace des vecteurs propres commun de $L$ avec valeur propre $\la_x$ pour $x$.
+Si $V_\la \neq 0$,  $\la$ s'appelle un vrai poids de $L$. 
+\end{ddd}
+
+\begin{lem}\label{l:clos}
+Soit $K\subset L$ un ideal de l'algebre de Lie $L$, $\la \in K^*$ et $V_\la$ l'espace 
+de poids pour  $\la$. Alors $V_\la$ est invariant sous $L$.
+\end{lem}
+
+\begin{prv} (du lemme~\ref{l:clos})\\
+Nous voulons montrer que pour $v\in V_\la$, $x\in K$ et $z\in L$, aussi
+$x(zv) = \la_x\cdot zv$ et donc $zv\in V_\la$. Evidemment,
+$$ x(zv) = [x,z]v +z(xv) =  \la_{[x,z]}v +\la_xzv\,, ~ \mbox{ parce que } [x,z]\in K . \hspace{4cm} (*) $$
+Nous voulons demontrer que le premier terme s'annulle, $ \la_{[x,z]}=0$. Pour ceci nous posons
+$W_0 = {\rm span}\{v\}$, $W_1 = {\rm span}\{v, zv\}$, 
+$W_2 = {\rm span}\{v, zv, z^2v\}, ~ \ldots$
+jusqu'a $W_j\equiv W$ qui est tel que $W_{j+1} = W_j$. Par definition les vecteurs
+$v,zv,\ldots, z^jv$ sont lineairement independants. Nous montrons d'abord que
+$$ x(z^iv) = \la_x z^iv + u\,, \quad u\in W_{i-1} \,. $$
+Nous procedons par induction en $i$. Pour $i=1$, (*) donne $ x(zv) = \la_xzv +u$ avec
+$u =\la_{[x,z]}v \in W_0$. En utilisant le resultat pour $i$ nous obtenons pour $i+1$
+$$xz^{i+1}v =\underbrace{[x,z]z^iv}_{\la_{[x,z]}z^iv + w}+
+ z\!\underbrace{xz^iv}_{\la_x z^iv + u}  = \la_x z^{i+1}v + (\la_{[x,z]}z^iv + w + zu) $$
+ ou $w,u\in W_{i-1}$ par hypothese d'induction. Donc $W$est invariant sous $K$ et
+ la matrice de $x\in K$ est triangulaire superieure avec $\la_x$ sur la diagonale.
+ Comme $K$ est un ideal ceci s'applique aussi a $[x,z]$ et, en particulier
+ $\left.{\rm tr}([x,z])\right|_W = (j+1)\la_{[x,z]}$. Mais $[x,z]$ est un commutateur, donc sa trace
+ est nulle, c'est-a-dire $\la_{[x,z]}=0$. Avec (*) ceci implique $zv\in V_\la$.  \hfill $\Box$
+\end{prv}
+
+\begin{ppp}\label{p:ev} Soit $L$ soluble. Alors il existe un poids
+$\la : L \ra \CC : x \mapsto \la_x$ avec espace de poids non-nulle. C'est-a-dire tous 
+les elements de $L$ ont un vecteur propre commun.
+\end{ppp}
+\begin{prv} (de la proposiation~\ref{p:ev}.)\\
+Par induction dans la dimension dim$\,L =m$. Pour $m=1$ il n'y a rien a 
+demontrer, parce que tout $x\in L \subset {\rm End}(V)$ a un vecteur propre. Soit alors 
+$m\ge 2$. Comme $L$ est soluble, $[L,L] = L^{(1)}$ est proprement inclus dans $L$. 
+Il existe alors un sous-espace $K\subset L$ de dimension $m-1$ qui contient $[L,L]$. Comme
+il contient tous les commutateurs, $K$ est meme un ideal, et $L=K\oplus \CC x$ pour un
+$x\in L\backslash K,~x\neq 0$. D'apres l'hypothese d'induction, la proposition est vrai pour $K$.
+Soit $V_{\la'}=W$ l'espace de poids non-nul pour $K$. D'apres le lemme~\ref{l:clos}, $W$ est
+invariant sous $x$ et donc $x$ possede un vecteur propre 
+$v\in W$, $v\neq 0$ avec $xv=\la_xv$. Alors $v$ est un vecteur propre commun pour tout $L$.
+ \hfill $\Box$
+\end{prv}
+
+\begin{ttt} {\bf (de Lie)}\label{t:Lie} \\
+Soit $L\subset {\rm End}(V)$ soluble. Il existe une base de $V$ telle les
+matrices de tous les endomorphismes dans $L$ sont triangulaires superieures. 
+\end{ttt}
+
+\begin{prv} (du theoreme de Lie)\\
+Par induction en $d={\rm dim}V$. Pour $d=1$ il n'y a rien a 
+demontrer. Soit alors $d\ge 2$. D'apres la prop.~\ref{p:ev} il existe un 
+$v_1\in V,~ v_1\neq 0$, qui est vecteur propre de tout $x\in L$ avec valeur propre $\la_x$. 
+Nous choisissons une base de $V$ qui
+a $v_1$ comme premier vecteur de base. Dans cette base les matrices des  
+endomorphismes dans $L$ prennent la forme
+$$
+M(x) =  \left(\begin{matrix} \la_x & a \\  0 &  M'(x) \end{matrix}\right)
+$$
+La matrice $M'(x)$ a la dimension $d-1$, donc d'apres l'hypothese d'induction nous pouvons
+completer $v_1$ a une base de $V$ tel que $M'(x)$ est triangulaire superieure pour tout $x\in L$.
+ \hfill $\Box$
+\end{prv}
+
+Ce theoreme characterise les algebres de Lie solubles: dans une base adaptee ces sont des matrices 
+triangulaires superieures. En plus, comme pour des matrices triangulaires superieures
+$x$ et $y$
+$$ \left([x,y]\right)_{ij} = \sum_\ell(x_{i\ell}y_{\ell j} -  y_{i\ell}x_{\ell j}) = 0 \mbox{ pour } i\ge j \,, $$
+leurs commutateurs sont des matrices {\em strictement}  triangulaires superieures.
+Mais comme nous l'avons vu dans les exercices, l'algebre de Lie des matrices {\em strictement}  
+triangulaires superieures est nilpotente. Donc si $L$ est soluble $[L,L]$ est nilpotent. Le converse est trivalement le cas. Nous avons donc le corollaire
+\begin{ccc}\label{c1:LLnil} $L$ est soluble, si et seulement si $[L,L]$ est nilpotent.
+\end{ccc}
+
+\subsection{Le critere de Cartan}
+Les algebres de Lie qui nous interessent sont des endomorphismes sur un espace vectoriel {\em complexe} 
+de dimension 
+fini, ou, apres le choix d'une base, des matrices. D'apres le  theoreme de Jordan--Chevalley (voire algebre lineaire, classification de Jordan) pour tout endomorphisme $x\in {\rm End}(V)$ il existe une base telle que
+la matrice de $x$ est en forme de blocs a l'aspect suivant
+$$
+x = \left(\begin{matrix} B_1 &  0 \cdots & 0 \cr  0 & \ddots & 0 \cr  0 & \cdots 0 & B_k \end{matrix}\right) \: , \qquad
+                  B_i  =   \left(\begin{matrix}  a& 1 & 0 \cdots & 0 \cr  0 & \ddots &\ddots  & 0 
+                                                    \cr \vdots &  & \ddots & 1 \cr 0 & \cdots & 0 & a \end{matrix}\right) \; ~ .
+$$
+Les $a$ sont les valeurs propres de $x$. Donc $x$ est de la forme
+\be x  = x_s + x_n \label{e:semnil}  \ee
+ou $x_s$ est une matrice diagonalizable et $x_n$ est nilpotent, et cette decomposition est unique.
+\begin{ddd} ~~\label{d:mat}
+\begin{itemize}
+\item
+Un endomorphisme est appele {\bf  semisimple} si il est diagonalizable. C'est-a-dire tous ses blocs dans 
+la forme normale de Jordan sont de taille $1\times 1$.
+\item Un endomorphisme, $x$ est appele {\bf nilpotent} s'il existe un $n\in\NN$ tel que $x^n=0$. 
+\item Les matrices $x\in \CC^{m\times m}$ avec $x= \left(x_{ij}\right)$ avec $x_{ij} =0$ si $i\ge j$ sont
+appelees les les matrice triangulaires strictement superieures. Ils sont denommees $N(m,\CC)$.
+\item Les matrices $x\in \CC^{m\times m}$ avec $x= \left(x_{ij}\right)$ avec $x_{ij} =0$ si $i> j$ sont
+appelees les les matrices triangulaires  superieures. Ils sont denommees $T(m,\CC)$.
+\end{itemize}
+\end{ddd}
+
+Dans la decomposition en haut alors $x_s$ est  semisimple et $x_n$ est nilpotent. 
+En plus, $x_s$ commute avec $x_n$. Ces deux conditions la define de fa\c{c}on unique.
+
+\begin{eee} Montrer que... 
+\begin{itemize} 
+\item  les  matrices   $x\in N(m,\CC)$ sont nilpotentes, c'est-a-dire il existe $n\in \NN$ tel que $x^n=0$.
+Determiner $n_{\max}$ tel que $n\le n_{\max}$ pour $x\in N(m,\CC)$.
+\item un endomorphisme  nilpotent ne peut avoir que $0$ comme valeur propre.
+\item les matrices $x_s$ et $x_n$ de la forme de Jordan commutent.
+\end{itemize}
+\end{eee}
+
+\begin{lem}\label{l:poly} Soit $x\in {\rm End}(V)$, $V$ un espace vectoriel (sur $\CC$) de dimension fini et 
+$x=x_s+x_n$ la forme normale de Jordan pour $x$. Alors ils existent des polynomes $p$ et $q$ tels que
+$p(x) = x_s$ et $q(x) = x_n$ sans terme constant, c'est-a-dire avec $p(0)=q(0)=0$. 
+\end{lem}
+\begin{prv} (du lemme~\ref{l:poly})\\
+Soit $(a_i,m_i) \in \CC\times \NN$ toutes les valeurs propres differentes avec leur multiplicite. Nous posons
+$\chi(t) = \prod_{i=1}^k(t-a_i)^{m_i}$, le polynome characteristique de $x$. Soit $V_i = \ke(x-a_i\id)^{m_i}$, 
+l'espace sur lequel $x$ agit avec le bloc $B_i$. Alors
+$ V = V_1\oplus \cdots \oplus V_k$, et chacun des espaces $V_i$ est stable sous $x$. 
+(C-est-a-dire $xV_i\subset V_i$, parce que $x$ commute avec $(x-a_i\id)^{m_i}$.) 
+Nous considerons les polynomes
+$$ p_i(t) = (t-a_i)^{m_i} ~ \mbox{et}\quad q_i(t) = (t)\prod_{j\neq i}^k(t-a_j)^{m_j} \,.$$
+Ici le facteur $t$ est multiplie dans $q_i$ seulement si aucun des valeurs propres est nulle, 
+$a_j\neq 0~\forall \, 1\le j\le k$. Les deux polynomes $p_i$ et $q_i$ sont relative primes. C'est-a-dire,
+leur plus grand diviseur commun est $1$. Ils existent alors des polynomes $r_i$ et $s_i$ tels que
+$$  r_i(t)p_i(t) + s_i(t)q_i(t) =1~\,. $$
+(Ceci est l'identite de Bezout. L'algorithme d'Euclid etendu permet de trouver $r_i$ et $s_i$ explicitement.)
+Comme $p_i(x)$ est nulle sur $V_i$ et $q_i(x)$ est nulle sur tous les $V_j\, , j\neq i$, nous obtenons
+$$   \left. s_i(x)q_i(x)\right|_{V_i} = 1  ~ \mbox{et}\quad \left. s_i(x)q_i(x)\right|_{V_j} = 0 \; \forall\, j\neq i \,. $$
+Si nous posons
+$$ p(t) = \sum_{i=1}^k a_is_i(t)q_i(t) \,. $$
+Il suit alors $\left. p(x)\right|_{V_i}=a_i$. Donc
+$$  p(x)  = \left(\begin{matrix}  a_1 & &  & & \cr  & \ddots & & & \cr & & a_1 & &  \cr & &  & \ddots& \cr & &  & & a_k
+                  \end{matrix}\right) =x_s \,.
+ $$
+En plus, par construction $p(0)=0$ (soit $a_i=0$ soit $q_i(0)=0$). Finalement,
+nous definissons simplement $q(t) = t-p(t)$, tel que $q(x) = x-x_s = x_n$. \hfill $\Box$                  
+\end{prv}
+\begin{ccc} Si $A\subset B\subset V$ sont des sous-espaces avec $x(B)\subset A$, alors aussi $x_s(B)\subset A$ et 
+ $x_n(B)\subset A$.
+\end{ccc}
+Ceci est evidemment vrai pour tout polynome $p(x)$ sans terme constant, comme pour $xB\subset A\subset B$ 
+aussi $x^nB\subset A$ .
+
+\begin{lem}\label{l:xadx} Si $x\in {\rm End}(V)$ est  semisimple/nilpotent tel est ad$(x) \in {\rm End}({\rm End}(V))$.
+\end{lem}
+\begin{prv}(du lemme~\ref{l:xadx}.)\\
+Soit d'abord $x$  semisimple. Nous pouvons alors choisir une base dans $V$ telle que $x$ est diagonal,
+$$  x =  \left(\begin{matrix}  a_1 & & 0\cr &\ddots & \cr 0& &  a_m
+                  \end{matrix}\right)  ~.
+$$
+Nous considerons la base $\left(e_{ij}\right)$ de End$(V)$ ou $e_{ij}$ est l'endomorphisme qui est represente
+par la matrice avec $1$ dans la position $ij$ est des zeros partout ailleurs dans la base choisie. Avec ceci nous trouvons
+\bean
+ \left( {\rm ad}(x)e_{ij}\right)_{\ell m} &=& x_{\ell k}(e_{ij})_{km} -  (e_{ij})_{\ell k} x_{km} \\
+  &=& a_\ell \de_{\ell k}\de_{ik}\de_{jm} - \de_{i\ell}\de_{jk}a_m\de_{km} \\
+  &=& a_\ell\de_{\ell i}\de_{jm} - a_m \de_{\ell i}\de_{jm}  = (a_\ell-a_m)\left(e_{ij}\right)_{\ell m} \,.
+\eean
+Donc ad$(x)$ est diagonal dans la base $\left(e_{ij}\right)$ de End$(V)$ et, en particulier,  semisimple.\\
+En plus, d'apres le lemme~\ref{l:nil}, ad$(x)$ est nilpotent si $x$ est  nilpotent.  \hfill $\Box$
+\end{prv}
+\begin{ccc} Soit $x=x_s+x_n$ la decomposition de Jordan de $x\in {\rm End}(V)$. Alors
+$$ {\rm ad}(x)  = {\rm ad}(x_s) + {\rm ad}(x_n)  $$
+est la decomposition de Jordan de ${\rm ad}(x) \in {\rm End}({\rm End}(V))$.
+\end{ccc}
+\begin{prv} D'apres le lemme~\ref{l:xadx} ad$(x_s)$ est  semisimple et ad$(x_n)$ est nilpotent. En plus,
+$$ [{\rm ad}(x_s), {\rm ad}(x_n)] = {\rm ad}([x_s,x_n]) = 0 \,. $$
+Comme la decomposition de Jordan est unique, ceci demontre le corollaire. \hfill $\Box$
+\end{prv}
+Nous pouvons maintenant obtenir un critere tres puissant pour la solubilite d'une algebre de Lie, $L$, le critere de Cartan. 
+Evidemment, $L$ est soluble si $[L,L]$ est nilpotent. D'autre part, le theoreme de Engel~\ref{t:engel}, nous dit que 
+$[L,L]$ est nilpotent si (et seul si) ad$_{[L,L]}(x)$ pour tout $x\in [L,L]$ est nilpotent. Nous commen\c{c}ons avec 
+un critere de trace pour des endomorphismes nilpotents.
+
+\begin{lem}\label{l:trace} Soit $A\subset B$ deux sous-espaces de End$(V)$, dim$V =m<\infty$. Soit
+$M = \{x\in{\rm End}(V)| [x,B]\subset A\}$ Si $x\in M$ satisfait a $\tr(xy)=0~\forall y\in M$, alors $x$ est nilpotent.
+\end{lem}
+
+\begin{prv}(du lemme~\ref{l:trace}.)\\
+Soit $x=x_s+x_n$ la decomposition de Jordan de $x$. Nous voulons demontrer que, sous les conditions du lemme $x_s=0$. Soit $v_1,\cdots v_m\in V$ une base de $V$ par rapport a laquelle $x_s$ est diagonal, $x_sv_i =a_iv_i$.
+Nous voulons montrer que tous les $a_i$ sont nulle. Pour ceci nous considerons l'espace vectoriel $E$ sur 
+le corps $\QQ$ engendre par les valeurs propres $a_i$. Nous montrerons que $E= 0$ ou, ce qui est equivalent,
+son dual $E^*=0$, c'est-a-dire, toute fonction lineaire $f:E\ra \QQ$ est zero. Soit $f\in E^*$ quelconque
+et $y\in{\rm End}(V)$ 
+donne par les valeurs $f(a_i)$ sur la base $v_i$. Soit $e_{ij}$ l'endomorphisme donne par la matrice $e_{ij}$ 
+dans cette meme base. Dans la preuve du lemme~\ref{l:xadx} nous avons vu que
+$$ {\rm ad}(x_s)(e_{ij}) = (a_i-a_j)e_{ij}\,, \mbox{ alors } ~ {\rm ad}(y)(e_{ij}) = (f(a_i)-f(a_j))e_{ij}\,.$$
+Soit maintenant $r(t)$ un polynome sans terme constant avec $r(a_i-a_j) = f(a_i)-f(a_j)$. Un tel polymome existe toujours (on le construit, par exemple, via l'interpolation de Lagrange). En plus, les valeurs sont bien definies
+a cause de la linearite de $f$: 
+si $a_i-a_j = a_\ell-a_k$ alors $f(a_i)-f(a_j) = f(a_i-a_j)= f( a_\ell-a_k) =f( a_\ell)-f(a_k)$. 
+Evidemment ad$(y) = r({\rm ad}(x_s))$.  Comme ad$(x_s)$ est la partie  semisimple de ad$(x)$ nous pouvons l'ecrire comme polynome en ad$(x)$ sans terme constant. Donc aussi ad$(y)$ est un polynome en ad$(x)$ sans terme constant. Mais ad$(x)B \subset A$, alors aussi ad$(y)B \subset A$, c'est-a-dire, $y\in M$. D'apres l'hypothese on a
+donc $\tr(xy)= \sum_i a_if(a_i) = 0$. Mais $ \sum_i a_if(a_i) \in E$. Nous appliquons $f$ sur cette equation, ce qui donne
+$\sum_i f(a_i)^2 =0$ pour des nombres $f(a_i)\in \QQ$, alors $f(a_i) =0$. Comme les $a_i$ foment une base de $E$ ceci implique $f\equiv 0$. \hfill $\Box$
+\end{prv}
+
+\begin{ttt} {\bf Le critere de Cartan}\label{t1:cartan}\\
+Soit $L\subset {\rm End}(V)$ une algebre, dim$V$ fini. Si $\tr(xy)=0~\forall x\in [L,L]$ et $y\in L$, alors $L$ est soluble. 
+\end{ttt}
+
+\begin{prv}(du critere de Cartan~\ref{t1:cartan}.)\\
+Comme remarque plus haut, il suffit de montrer que $[L,L]$ est nilpotent ou, ce que est equivalent (thm de Engel~\ref{t:engel}), 
+que tout $x\in [L,L]$ est nilpotent. Pour montrer ceci nous appliquons le lemme~\ref{l:trace} a la situation donnee avec $A=[L,L]$ et $B=L$, donc $M=\{x\in {\rm End}(V)| [x,L]\subset [L,L]\}$. Evidemment, $L\subset M$. Notre hypothese est que $\tr(xy)=0~\forall\; x\in [L,L]\,,~ y\in L$, tandis que pour appliquer le lemme il nous faut que 
+$\tr(xy)=0~\forall\; x\in [L,L]\,,~ y\in M$. Mais pour $z\in M$ et $[x,y]\in [L,L]$ nous avons
+$\tr([x,y]z) = \tr(x[y,z])=\tr([y,z]x)$. Mais $[y,z]\in [L,L]$ pour $z\in M$ et $y\in L$, donc la trace est nulle 
+d'apres l'hypothese du theoreme. \hfill $\Box$
+\end{prv}
+
+\begin{ccc}\label{c1:sol} Soit $L$ une algebre de Lie avec $\tr\left({\rm ad}(x){\rm ad}(y)\right) =0$ 
+for all $x\in [L,L]$ et $y\in L$. Alors $L$ est soluble.
+\end{ccc}
+
+\begin{prv}(du corollaire~\ref{c1:sol}.)\\
+En appliquant le critere de Cartan sur la representation adjointe de $L$ nous trouvons que ad$(L)$ est soluble.
+Comme $\ke({\rm ad}) =Z(L)$ est soluble et $L/Z(L)$ est isomorphe a ${\rm ad}(L)$ et donc aussi soluble, 
+il suit de la prop.~\ref{p:sol} que $L$ est soluble.
+\end{prv}
+L'autre direction (si $[L,L]$ est nilpotent, $L$ est soluble) est triviale.
+Comme espace lineaire, $L \cong L/[L,L] \oplus [L,L]$. En plus, les deux termes sont des ideaux dans $L$ et
+$L/[L,L]$ est abelien, une algebre de Lie soluble est alors de la forme
+$ L = A \oplus [L,L]$, ou $A$ est un ideal abelien. Si $A=0$, $L$ est meme nilpotent et content donc un ideal
+abelien (l'avant-dernier pas dans la serie des $L^n$). Nous en concluons en particulier que toute algebre de Lie soluble (non-nulle) contient un ideal abelien non-nulle.
+
+\subsection{La forme de Killing et la decomposition des algebres de Lie  semisimples}  
+
+Nous introduisons le produit scalaire suivant sur les algebres de Lie:
+\begin{ddd} {\bf la forme de Killing:}\\
+Pour $x,y\in \GG$ nous posons
+\be
+\ka(x,y) := \tr({\rm ad}(x){\rm ad}(y))
+\ee
+\end{ddd}
+Cette definition est independant du choix de la base, lineaire en $x$ et en $y$ et symetrique. En plus,
+un simple calcul montre que $\ka([x,y],z) = \ka(x,[y,z])$.
+
+Nous demontrerons que sur une algebre de Lie  semisimple, la forme de Killing est non-degeneree.
+ D'abord nous demontrons le lemme suivant qui va etre utile dans la suite:
+\begin{lem}\label{l1:ka} Soit $I\subset L$ in ideal de l'algebre $L$. Si $\ka$ est la forme de Killing sur $L$ et $\ka_I$ 
+celle sur $I$ alors $\ka_I = \left.\ka\right|_{I\times I}$.
+\end{lem}
+Ici $\ka_I$ denomme la forme de Killing sur l'algebre $I$ tandis que $ \left.\ka\right|_{I\times I}$ 
+est la forme de Killing $\ka$ sur $L$ limitee a $I\times I$.
+\begin{prv} D'abord un fait simple de l'algebre lineaire: si $W\subset V$ est un sous-espace (de dimension fini) 
+et $\phi$ est un endomorphisme avec $\phi(V) \subset W$, alors $\tr\phi = tr\phi|_W$. (Pour voir ceci prendre une base de $W$ et la completer a une base de $V$. La matrice resultante pour $\phi$ alors n'aura des elements non-nulle
+ que dans les colonnes qui correspondent a $W$.) Si alors $x,y\in I$,
+ ad$(x){\rm ad}(y)$ est un endomorphisme qui applique $L$ dans $I$ donc sa trace, $\ka(x,y)$ 
+ est egale a la trace $\ka_I(x,y)$ de ad$(x){\rm ad}(y)|_I =  {\rm ad}_I(x){\rm ad}_I(y)$ dans $I$.
+ \hfill $\Box$
+\end{prv}
+\begin{ddd} Soit $L$ une algebre de Lie. L'ideal soluble maximal dans $L$ s'appelle radical de $L$, ${\rm Rad}(L)$.
+\end{ddd}
+Evidemment Rad$(L) =0$ si l'algebre de Lie est  semisimple.
+
+Il faut encore demontrer que Rad$(L)$ est bien defini. Pour ceci supposons qu'ils existent deux ideaux maximaux,
+$I_1 \neq I_2$ avec dim$I_1={\rm dim} I_2 \neq 0$. Donc $I_1+I_2$ est aussi un ideal qui est plus grand 
+que $I_1$ et $I_2$, ce qui contredit a la supposition que $I_1$ et $I_2$ soient maximal.
+
+Pour une forme bilineaire quelconque sur un espace vectoriel, $\beta :L\times L \ra \CC : (x,y)\mapsto \beta(x,y)$,
+le radical $S\subset L$ est l'espace lineaire defini par $S =\{x\in L| \beta(x,y)=0~\forall y\in L\}$. 
+\begin{eee} Montrer que pour la forme de
+Killing d'une algebre de Lie, le radical $S$ n'est pas juste un espace lineaire mais un ideal. 
+\end{eee}
+Une forme bilineaire est non-degeneree si $S=0$. En algebre lineaire on a une fa\c{c}on simple de
+tester si une forme bilineaire est degeneree ou non: On choisit une base, $x_1,\cdots, x_m$ de $L$.
+Alors $\ka$ est est non-degeneree si $\det(\ka(x_i,x_j))\neq 0$.
+\begin{eee} Montrez ceci! \end{eee}
+
+\begin{ttt} ~~~ \label{t1:ssk}
+ Une algebre de Lie, $\GG$, est  semisimple si et seulement si sa forme de Killing n'est pas degeneree.
+C'est-a-dire $\ka(x,y) = 0 ~\forall\; y$ seul si $x=0$.
+\end{ttt}
+
+\begin{prv} (du theoreme~\ref{t1:ssk}.)\\
+Supposons d'abord $L$  semisimple, donc Rad$(L) = 0$. Soit $S$ le radical de $\ka$. Donc
+$\tr({\rm ad}(x){\rm ad}(y)) = 0~\forall \; x\in S$ et $y\in L$, en particulier pour $y\in [S,S]$. D'apres le 
+critere de Cartan donc $S$ est soluble donc $S \subset {\rm Rad}(L)=0$.\\
+Soit maintenant $\ka$ non-degeneree donc $S=0$. Pour demontrer que $L$ est  semisimple 
+il suffit de montrer qu'il n'a pas d'ideal abelien non-nul, ou, que tout ideal abelien $I$ est inclu dans $S$. 
+Supposons alors que $I$ soit un ideal abelien dans $L$. Pour $x\in I$ et $y\in L$, ad$(x){\rm ad}(y)$ 
+applique $L$ dans $I$ donc $\left({\rm ad}(x){\rm ad}(y)\right)^2$
+applique $L$ dans  $[I,I]=0$. Ceci montre que  ${\rm ad}(x){\rm ad}(y)$ est nilpotent donc sa trace est nulle.
+Comme $y$ est arbitraire ceci implique $x\in S$. \hfill $\Box$
+\end{prv}
+
+\begin{ddd} Une algebre $L$ est appelee somme directe d'ideaux $I_1,\cdots I_k$ si $L$ est sa somme directe des espaces vectoriels $I_j$. Cette condition implique que $[I_i,I_j] \subset I_i\cap I_j = \{0\} ~\forall i\neq j$. Donc les
+ideaux $I_j$ commutent entre eux. Nous ecrivons
+$$  L = I_1 \oplus \cdots \oplus I_k \;.$$ 
+\end{ddd}
+
+\begin{ttt}\label{t1:sum}
+Une algebre de Lie, $L$, est  semisimple si et seulement si ils existent des ideaux $L_1,\cdots, L_k$ de $L$ qui sont simples
+comme algebres de Lie, telles que  
+$$  L = L_1 \oplus \cdots \oplus L_k \;.$$ 
+Tout ideal simple de $L$ est un des $L_j$. En plus, la forme de Killing sur $L_j$ est simplement 
+la restriction de $\ka$ sur $L_i\times L_i$. 
+\end{ttt}
+\begin{prv}(du theoreme~\ref{t1:sum}.)\\
+Evidemment si les condition du theoreme sont satisfait, $L$ est  semisimple. Il faut alors juste demontrer que 
+cette decomposition existe et qu'elle est unique pour toute algebre de Lie  semisimple. Nous 
+procedons par induction par rapport a la dimension de $L$. Pour dim$L =0,1$ l'enonce est trivial.
+Soit donc dim$L>1$ et $I\subset L$ un ideal non-trivial quelconque. Si un tel ideal n'existe pas, $L$ est simple et 
+la decomposition est faite. Alors
+$I^{\perp} \equiv \{x\in L|\ka(x,y) =0 ~\forall y\in I\}$ est aussi un ideal, parce que pour $x\in I^{\perp},~ y\in I$ et $z\in L$
+$\ka([x,z],y) =\ka(x,[z,y]) =0$, donc aussi $[x,z]\in  I^{\perp}$. En appliquant le critere de Cartan dans
+la forme due corollaire~\ref{c1:sol} sur $I$ nous trouvons que $I\cap I^{\perp}\subset L$ est soluble, donc $I\cap I^{\perp} = 0$. Comme $\ka$ est non-degeneree
+dim$I + {\rm dim} I^{\perp} = {\rm dim}L$, donc $L = I \oplus I^{\perp}$. 
+Soit maintenant $L_1$ un ideal minimal et $L= L_1\oplus L_1^{\perp}$. Comme ideal de $L$, $L_1^{\perp}$ est
+aussi  semisimple et peut etre decopmposee pas induction.
+
+Nous demontrons encore que ces ideaux minimaux sont uniques. Soit $I\in L$ un ideal simple, non-nul. Alors aussi 
+$[I,L]\subset I$ est un ideal donc$[I,L]=I$ comme $Z(L)=0$ interdit $[I,L]=0$. Donc
+$$ I = [I,L] = [I,L_1]\oplus \cdots \oplus [I,L_k] \,. $$
+Comme $I$ est un ideal simple tous sauf un des ces termes doivent disparai tre. Soit, disons $[I,L_j]=I$. 
+Alors $I\subset L_j$ et donc $I=L_j$ parce que aussi $L_j$ est simple. \\
+La derniere assertion du theoreme est une consequence du lemme~\ref{l1:ka} \hfill $\Box$.
+\end{prv}
+Avec ceci les algebre de Lie  semisimple se reduisent a des composantes simples et le produit de Lie 
+ne melange pas ces composantes, $[L_i,L_j] = 0$ si $i\neq j$. Nous pouvons le calculer dans les $L_j$.
+L'etude des algebres de Lie  semisimples est alors reduit a celle des  algebres de Lie simples.
+
+Une algebre de Lie qui n'est pas  semisimple s'ecrit de la forme 
+$$L=R \oplus L_1\oplus \cdots \oplus L_k \,,$$
+ou $R={\rm Rad}(L)$ et les $L_i$ sont simples. Comme $R$ est soluble il suit que $R\cap L_i =0$ et donc aussi
+$[R,L_i]\subset R\cap L_i =0$. Pour etudier toutes les algebres de Lie de dimension fini, il suffit alors d'etudier 
+les algebres de Lie simples et les algebres de Lie solubles, qui sont, d'apres le theoreme de Lie, triangulaires.

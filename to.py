@@ -8,6 +8,26 @@ import re
 import sys
 import pickle
 import argparse
+import googletrans as gt
+from tqdm import tqdm
+
+def delete(deletion_list, filename):
+    f = open(filename,'r')
+    a = deletion_list
+    lst = []
+    for line in f:
+        for word in a:
+            if word in line:
+                line = line.replace(word,'')
+        lst.append(line)
+    f.close()
+    f = open(filename,'w')
+    for line in lst:
+        f.write(line)
+    f.close()
+def splitter(n, s):
+    pieces = s.split()
+    return (" ".join(pieces[i:i+n]) for i in range(0, len(pieces), n))    
 
 parser = argparse.ArgumentParser()
 parser.add_argument('filename')
@@ -17,6 +37,8 @@ if(re.search('.tex$',args.filename)==None):
     sys.exit('The input should be .tex file. Exit.')
 
 print('LaTeX file:',args.filename)
+
+delete(['\\\'','\\`', '\\´', '\\^'], args.filename)
 
 with open(args.filename, 'r') as source_file:
     source = source_file.read()
@@ -104,8 +126,11 @@ text=recommand.sub(repl_f,text)
 with open('gtexfix_commands', 'wb') as fp:
     pickle.dump(commands, fp)
 
+
+translator = gt.Translator()
+
 ### Save the processed output to .txt file
-limit=30000 # Estimated Google Translate character limit
+limit=3000 # Estimated Google Translate character limit
 filebase = re.sub('.tex$','',args.filename)
 start=0
 npart=0
@@ -116,7 +141,8 @@ for m in re.finditer(r'\.\n',text):
         output_filename = filebase+'_%d.txt'%npart
         npart+=1
         with open(output_filename, 'w') as txt_file:
-	        txt_file.write(text[start:end])
+            translated = translator.translate(text[start:end])
+            txt_file.write(translated.text)
         print('Output file:',output_filename)
         start=end
         end=m.end()
