@@ -10,17 +10,35 @@ import pickle
 import argparse
 import googletrans as gt
 from tqdm import tqdm
+import codecs
 
 def delete(deletion_list, filename):
-    f = open(filename,'r')
-    a = deletion_list
-    lst = []
-    for line in f:
-        for word in a:
-            if word in line:
-                line = line.replace(word,'')
-        lst.append(line)
-    f.close()
+    
+    try:
+        f = open(filename,'r')
+        a = deletion_list
+        lst = []
+        for line in f:
+            for word in a:
+                if word in line:
+                    line = line.replace(word,'')
+            lst.append(line)
+        f.close()
+    except:
+        f = open(filename,'r', encoding='utf-8')
+        txt = f.read()
+        f.write(txt.encode('utf-8'))
+        f.close()
+        
+        f = open(filename,'w')
+        a = deletion_list
+        lst = []
+        for line in f:
+            for word in a:
+                if word in line:
+                    line = line.replace(word,'')
+            lst.append(line)
+        f.close()
     f = open(filename,'w')
     for line in lst:
         f.write(line)
@@ -32,6 +50,10 @@ def splitter(n, s):
 parser = argparse.ArgumentParser()
 parser.add_argument('filename')
 args = parser.parse_args()
+
+indir = "./input/"
+file_basename = args.filename.replace('.tex', '')
+args.filename = indir + args.filename
 
 if(re.search('.tex$',args.filename)==None):
     sys.exit('The input should be .tex file. Exit.')
@@ -94,6 +116,8 @@ for m in re.finditer(r'\\end{ *equation\** *}|\\end{ *figure\** *}|\\end{ *eqnar
     +r'|\\end{ *displaymath\** *}|\\end{ *gather\** *}|\\\]',text):
     end_values.append(m.end())
 nitems=len(start_values)
+print(len(start_values))
+print(len(end_values))
 assert(len(end_values)==nitems)
 if(nitems>0):
     newtext=text[:start_values[0]]
@@ -130,24 +154,32 @@ with open('gtexfix_commands', 'wb') as fp:
 translator = gt.Translator()
 
 ### Save the processed output to .txt file
-limit=3000 # Estimated Google Translate character limit
+limit=5000 # Estimated Google Translate character limit
 filebase = re.sub('.tex$','',args.filename)
 start=0
 npart=0
+
+collect_text = []
 for m in re.finditer(r'\.\n',text):
     if(m.end()-start<limit):
         end=m.end()
     else:
-        output_filename = filebase+'_%d.txt'%npart
+        #output_filename = filebase+'_%d.txt'%npart
         npart+=1
-        with open(output_filename, 'w') as txt_file:
-            translated = translator.translate(text[start:end])
-            txt_file.write(translated.text)
-        print('Output file:',output_filename)
+        translated = translator.translate(text[start:end])
+        collect_text.append(translated.text)
+        #print('Output file:',output_filename)
         start=end
         end=m.end()
-output_filename = filebase+'_%d.txt'%npart
+
+output_filename = file_basename + '.txt'
+translated = translator.translate(text[start:])
+collect_text.append(translated.text)
+full_text = ""
+for text in collect_text:    
+        full_text += text
 with open(output_filename, 'w') as txt_file:
-    txt_file.write(text[start:])
+    txt_file.write(full_text)
+    
 print('Output file:',output_filename)
 print('Supply the output file(s) to Google Translate')

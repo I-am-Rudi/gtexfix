@@ -13,6 +13,8 @@ parser = argparse.ArgumentParser()
 parser.add_argument('filename')
 args = parser.parse_args()
 
+outdir = "./output/"
+
 if(re.search('.txt$',args.filename)==None):
     sys.exit('The input should be .txt file. Exit.')
 
@@ -83,7 +85,7 @@ newtext += trtext[here:]
 trtext=newtext
 
 ### Save the processed output to .tex file
-output_filename = re.sub('.txt$','.tex',args.filename)
+output_filename = re.sub('.txt$','.tex', outdir + args.filename)
 with open(output_filename, 'w') as translation_file:
 	translation_file.write(trtext)
 print('Output file:',output_filename)
