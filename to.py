@@ -107,11 +107,11 @@ with open('gtexfix_comments', 'wb') as fp:
 ### Hide LaTeX constructs \begin{...} ... \end{...}
 start_values=[]
 end_values=[]
-for m in re.finditer(r'\\begin{ *equation\** *}|\\begin{ *figure\** *}|\\begin{ *eqnarray\** *}|\\begin{ *multline\** *}'
+for m in re.finditer(r'\$\$|\\begin{ *picture\** *}|\\begin{ *tabular\** *}|\\begin{ *equation\** *}|\\begin{ *figure\** *}|\\begin{ *eqnarray\** *}|\\begin{ *multline\** *}'
     +r'|\\begin{ *thebibliography *}|\\begin{ *verbatim\** *}|\\begin{ *table\** *}|\\begin{ *subequations\** *}|\\begin{ *align\** *}'
     +r'|\\begin{ *displaymath\** *}|\\begin{ *gather\** *}|\\\[',text):
     start_values.append(m.start())
-for m in re.finditer(r'\\end{ *equation\** *}|\\end{ *figure\** *}|\\end{ *eqnarray\** *}|\\end{ *multline\** *}'
+for m in re.finditer(r'\$\$|\\end{ *picture\** *}|\\end{ *tabular\** *}|\\end{ *equation\** *}|\\end{ *figure\** *}|\\end{ *eqnarray\** *}|\\end{ *multline\** *}'
     +r'|\\end{ *thebibliography *}|\\end{ *verbatim\** *}|\\end{ *table\** *}|\\end{ *subequations\** *}|\\end{ *align\** *}'
     +r'|\\end{ *displaymath\** *}|\\end{ *gather\** *}|\\\]',text):
     end_values.append(m.end())
@@ -173,8 +173,10 @@ for m in re.finditer(r'\.\n',text):
         end=m.end()
 
 output_filename = file_basename + '.txt'
-translated = translator.translate(text[start:])
-collect_text.append(translated.text)
+print(text[start:])
+#translated = translator.translate(text[start:])
+#collect_text.append(translated.text)
+collect_text.append(text[start:])
 full_text = ""
 for text in collect_text:    
         full_text += text
