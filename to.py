@@ -173,10 +173,10 @@ for m in re.finditer(r'\.\n',text):
         end=m.end()
 
 output_filename = file_basename + '.txt'
-print(text[start:])
-#translated = translator.translate(text[start:])
-#collect_text.append(translated.text)
-collect_text.append(text[start:])
+
+translated = translator.translate(text[start:])
+collect_text.append(translated.text)
+
 full_text = ""
 for text in collect_text:    
         full_text += text
